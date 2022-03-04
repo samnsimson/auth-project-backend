@@ -15,12 +15,13 @@ export default class AuthController extends BaseController {
         this.initRouter();
     }
 
-    initRouter() {
-        this.initGetMethods();
-    }
+    initRouter = () => {
+        this.initPostMethods();
+    };
 
-    initGetMethods() {
-        this.router.get("/login", this.auth.login);
-        this.router.get("/signup", this.auth.signup);
-    }
+    initPostMethods = () => {
+        this.router.post("/signup", this.auth.signup);
+        this.router.post("/login", this.auth.login);
+        this.router.post("/verify", this.auth.verifyOTP);
+    };
 }
