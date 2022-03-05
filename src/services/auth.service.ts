@@ -42,9 +42,7 @@ export default class AuthService {
             token: token,
             encoding: "base32",
         });
-        verified
-            ? res.status(200).send("SUCCESS!")
-            : res.status(400).send("FAILURE!");
+        res.status(verified ? 200 : 400).send(verified);
     };
 
     public signup = async (req: Request, res: Response) => {

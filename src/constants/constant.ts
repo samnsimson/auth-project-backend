@@ -12,6 +12,6 @@ export const ERR_WRONG_PASSWORD = {
 
 export const ERR_INVALID_USER = {
     type: "error",
-    status: 400,
+    status: 404,
     message: "User unavailable",
 };
