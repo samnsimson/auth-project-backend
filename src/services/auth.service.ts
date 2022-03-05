@@ -47,8 +47,8 @@ export default class AuthService {
 
     public signup = async (req: Request, res: Response) => {
         try {
-            const { username, password } = req.body;
-            const id = md5(username);
+            const user = req.body;
+            const id = md5(user.username);
             const userAvailable = this.getUser(id);
             if (userAvailable) throw new Error(JSON.stringify(ERR_USER_EXISTS));
             const dbPath = `/user/${id}`;
@@ -57,9 +57,8 @@ export default class AuthService {
             const qrcode = await QRCode.toDataURL(secretUrl);
             db.push(dbPath, {
                 id,
-                username,
-                password,
                 qrcode,
+                ...user,
                 ...secret,
             });
             res.status(200).json({ id, qrcode });
@@ -77,7 +76,6 @@ export default class AuthService {
             const user = db.getData(dbPath);
             return user.id;
         } catch (error: any) {
-            console.log(error);
             return null;
         }
     };

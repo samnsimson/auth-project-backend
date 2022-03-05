@@ -17,9 +17,15 @@ export default class UserController extends BaseController {
 
     initRouter = () => {
         this.initGetMethods();
+        this.initPostMethods();
     };
 
     initGetMethods = () => {
+        this.router.get("/", this.user.getAllUsers);
         this.router.get("/:id", this.user.getUser);
+    };
+
+    initPostMethods = () => {
+        this.router.post("/checkin", this.user.checkin);
     };
 }
